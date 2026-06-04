@@ -28,8 +28,9 @@ chmod +x scripts/*.sh
 ### Host prerequisites
 
 The first step is to install host prerequisites before building the challenge.
-On Debian/Ubuntu hosts, install the packaged dependencies from
-`requirements.txt` with:
+This installer currently supports Debian/Ubuntu hosts with `apt-get`.
+On Debian/Ubuntu, install the packaged dependencies from `requirements.txt`
+with:
 
 ```bash
 chmod +x scripts/install-requirements.sh
@@ -41,6 +42,10 @@ If you want to preview the packages without installing them:
 ```bash
 ./scripts/install-requirements.sh --dry-run
 ```
+
+If the test machine uses a different Linux distribution, install equivalent
+packages manually and ensure `docker compose` is available before running the
+build.
 
 If your VM or host uses a different Linux distribution, install equivalent
 packages manually.
