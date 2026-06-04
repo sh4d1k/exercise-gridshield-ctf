@@ -28,8 +28,10 @@ chmod +x scripts/*.sh
 ### Host prerequisites
 
 The first step is to install host prerequisites before building the challenge.
-This installer currently supports Debian/Ubuntu hosts with `apt-get`.
-On Debian/Ubuntu, install the packaged dependencies from `requirements.txt`
+This installer currently supports Ubuntu 26.04 LTS (and equivalent Debian/Ubuntu
+hosts) with `apt-get`.
+
+On Ubuntu 26.04 LTS, install the packaged dependencies from `requirements.txt`
 with:
 
 ```bash
