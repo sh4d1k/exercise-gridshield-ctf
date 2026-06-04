@@ -27,7 +27,8 @@ chmod +x scripts/*.sh
 
 ### Host prerequisites
 
-On Debian/Ubuntu hosts, install the packaged prerequisites from
+The first step is to install host prerequisites before building the challenge.
+On Debian/Ubuntu hosts, install the packaged dependencies from
 `requirements.txt` with:
 
 ```bash
