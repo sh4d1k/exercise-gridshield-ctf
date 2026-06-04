@@ -74,13 +74,13 @@ services:
     restart: unless-stopped
 
   m4:
-    build: ../src/m4
+    build: ../src/attacker-workstation
     image: gridshield/m4:public
     container_name: gridshield_m4
     ports:
       - "2224:22"
     volumes:
-      - ../generated/m4/home/devuser:/seed_home:ro
+      - ../generated/attacker-workstation/home/devuser:/seed_home:ro
     networks:
       internal:
         ipv4_address: 10.1.1.15

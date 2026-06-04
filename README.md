@@ -20,9 +20,29 @@ TestDisk/PhotoRec, QEMU, and Python 3:
 
 ```bash
 chmod +x scripts/*.sh
+./scripts/install-requirements.sh
 ./scripts/build.sh
 ./scripts/test.sh
 ```
+
+### Host prerequisites
+
+On Debian/Ubuntu hosts, install the packaged prerequisites from
+`requirements.txt` with:
+
+```bash
+chmod +x scripts/install-requirements.sh
+./scripts/install-requirements.sh
+```
+
+If you want to preview the packages without installing them:
+
+```bash
+./scripts/install-requirements.sh --dry-run
+```
+
+If your VM or host uses a different Linux distribution, install equivalent
+packages manually.
 
 Start point for participants:
 
@@ -82,6 +102,7 @@ organiser/        solution guide, scoring, flags, troubleshooting
 ctfd/             optional CTFd challenge-as-code files
 infra/            Docker Compose and local infrastructure
 src/              challenge service/source files
+  src/attacker-workstation  M4 attacker workstation source
 scripts/          build, test, reset, and artifact generation
 generated/        generated evidence and runtime artifacts, gitignored
 End_files/        public-safe final evidence generation notes

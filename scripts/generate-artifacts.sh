@@ -9,14 +9,14 @@ if [[ -d "$out" ]]; then
   sudo chmod -R u+rwX "$out" 2>/dev/null || true
   sudo rm -rf "$out"
 fi
-mkdir -p "$out"/{keys,m1/evidence,m1/cache,m2/ftp,m2/internal/secure_mgmt/keys,m2/internal/secure_mgmt/agent_logs,m3/openvpn/clients,m3/log,m3/ssh,m3/support,m4/home/devuser/Desktop,m4/home/devuser/.ssh,m4/home/devuser/Backups,ctfd}
+mkdir -p "$out"/{keys,m1/evidence,m1/cache,m2/ftp,m2/internal/secure_mgmt/keys,m2/internal/secure_mgmt/agent_logs,m3/openvpn/clients,m3/log,m3/ssh,m3/support,attacker-workstation/home/devuser/Desktop,attacker-workstation/home/devuser/.ssh,attacker-workstation/home/devuser/Backups,ctfd}
 
 ssh-keygen -q -t rsa -b 2048 -N 'GridVPN#2026' -C 'gridshield-vpn-access' -f "$out/keys/vpn_access.pem"
 ssh-keygen -q -t rsa -b 2048 -N 'Infradev#99' -C 'gridshield-dev-key' -f "$out/keys/dev_key"
 cp "$out/keys/vpn_access.pem" "$out/m2/internal/secure_mgmt/keys/vpn_access.pem"
 cp "$out/keys/vpn_access.pem.pub" "$out/m3/ssh/authorized_keys"
 cp "$out/keys/dev_key" "$out/m3/ssh/dev_key"
-cp "$out/keys/dev_key.pub" "$out/m4/home/devuser/.ssh/authorized_keys"
+cp "$out/keys/dev_key.pub" "$out/attacker-workstation/home/devuser/.ssh/authorized_keys"
 
 cat > "$out/m1/evidence/case_notes.txt" <<'TXT'
 INITIAL EVIDENCE ACQUISITION NOTE
@@ -263,13 +263,13 @@ rm "$out/tmp_operator.ovpn"
 
 wallet='bc1q7xkm3p9nfv2c8wq4rjh5e6dtya0ls3gkpz8mn'
 wallet_md5="$(printf '%s' "$wallet" | md5sum | awk '{print $1}')"
-echo "$wallet" > "$out/m4/home/devuser/Desktop/payment_wallet.txt"
-cat > "$out/m4/home/devuser/Desktop/ops_notes.txt" <<TXT
+echo "$wallet" > "$out/attacker-workstation/home/devuser/Desktop/payment_wallet.txt"
+cat > "$out/attacker-workstation/home/devuser/Desktop/ops_notes.txt" <<TXT
 NovaSec C2: 198.51.100.20 / internal service mapping
 Blue Transit VPN: 192.0.2.10 / relay-01
 Operator workstation: 198.18.45.23 / devstation
 TXT
-cat > "$out/m4/home/devuser/Desktop/recovery_notes.txt" <<TXT
+cat > "$out/attacker-workstation/home/devuser/Desktop/recovery_notes.txt" <<TXT
 Cleanup reminder - case bundle
 
 Payment wallet receipt is on the desktop. Do not paste the wallet into ops notes.
@@ -284,13 +284,13 @@ Regenerate with: printf %s "\$wallet" | md5sum
 Working copies were moved into the workstation backup before cleanup.
 If recovery is needed, carve the backup image and test the PDF passwords.
 TXT
-cat > "$out/m4/home/devuser/.bash_history" <<'TXT'
+cat > "$out/attacker-workstation/home/devuser/.bash_history" <<'TXT'
 ssh nsadmin@10.1.1.20
 ssh infraadmin@10.1.1.10
 ssh devuser@10.1.1.15
 find /home/devuser -type f -size +10M
 TXT
-cat > "$out/m4/home/devuser/.ssh/known_hosts" <<'TXT'
+cat > "$out/attacker-workstation/home/devuser/.ssh/known_hosts" <<'TXT'
 10.1.1.20 ssh-rsa SYNTHETIC_M2
 10.1.1.10 ssh-rsa SYNTHETIC_M3
 TXT
@@ -359,7 +359,7 @@ qpdf --encrypt "$wallet" "$wallet" 256 -- "$work/fictional_operator_id_source.pd
 qpdf --encrypt "$wallet_md5" "$wallet_md5" 256 -- "$work/fictional_service_contract_source.pdf" "$work/fictional_service_contract.pdf"
 echo 'wallet-derived PDF password' > "$work/wallet_source.txt"
 echo 'contract password uses md5(payment wallet)' > "$work/contract_password_source.txt"
-img="$out/m4/home/devuser/Backups/workstation_home_backup_2026-05-16.img"
+img="$out/attacker-workstation/home/devuser/Backups/workstation_home_backup_2026-05-16.img"
 dd if=/dev/zero of="$img" bs=1M count=32 status=none
 mkfs.ext4 -F "$img" >/dev/null
 sudo mount -o loop "$img" "$mnt"

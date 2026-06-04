@@ -1,0 +1,23 @@
+# Debian/Ubuntu packages required to build and run Exercise Gridshield
+# Install with ./scripts/install-requirements.sh
+
+docker.io
+docker-compose-plugin
+docker-compose
+build-essential
+qemu-system-x86
+qpdf
+john
+zip
+unzip
+testdisk
+photorec
+openssl
+python3
+curl
+git
+golang-go
+xz-utils
+cpio
+socat
+busybox
